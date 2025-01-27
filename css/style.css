@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+    color: aliceblue;
+    background-color: black;
+}
+
+tbody {
+    color: azure;
+    border: 1px;
+    margin: auto;
+}
