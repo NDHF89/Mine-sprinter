@@ -9,3 +9,7 @@ tbody {
     border: 1px;
     margin: auto;
 }
+
+div{
+    align-self: center;
+}

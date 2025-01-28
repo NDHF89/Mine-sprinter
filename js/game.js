@@ -1,8 +1,15 @@
 'use strict'
 
+const MINE = '💩'
+const MARKED = '✅'
+const COVERD = '🟨'
+
 const EASY = {size:4, mines:2}
 const MED = {size:8, mines:14}
 const HARD = {size:12, mines:32}
+
+
+
 // const OTHER = +prompt
 // const elBoard = document.querySelector("div.board-container")
 
@@ -25,12 +32,12 @@ function onInit() {
 }
 
 
-function buildBoard(difficultySize) {
+function buildBoard(Size, mines) {
     var board = []
 
-    for (var i = 0; i < difficultySize; i++) {
+    for (var i = 0; i < Size; i++) {
         board[i] = []
-        for (var j = 0; j < difficultySize; j++) {
+        for (var j = 0; j < Size; j++) {
             board[i][j] = {
                 i:i, j:j,
                 minesAroundCount: 0,
@@ -57,7 +64,7 @@ function renderBoard(mat, selector) {
             const className = `cell cell-${i}-${j}`
 
             strHTML += `<td class="${className}">
-                                    ${cell.isCovered ? '⛓️' : cell.isMine ? '🍺' : cell.minesAroundCount}
+                                    ${cell.isCovered ? COVERD : cell.isMarked ? MARKED : cell.isMine ? MINE : cell.minesAroundCount}
                                    </td>`
         }
         strHTML += '</tr>'
@@ -74,9 +81,21 @@ function renderBoard(mat, selector) {
 
 function setMinesNegsCount(board){
 
+    var minesCount = 0
+    for (var i = cellI - 1; i <= cellI + 1; i++) {
+        if (i < 0 || i >= mat.length) continue
+        for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+            if (i === cellI && j === cellJ) continue
+            if (j < 0 || j >= mat[i].length) continue
+            if (mat[i][j] === gBoard.isMine) minesCount++
+        }
+    }
+    return minesCount
 }
 
 function onCellClicked(elCell, i, j){
+
+    // var elCell = `cell-${i}-${j}`
 
 }
 
